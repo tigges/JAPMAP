@@ -3,42 +3,49 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { basemaps, type BasemapId } from "./data/basemap";
 import {
-  gatewayOf,
-  gateways,
-  placeholderLine,
-  poles,
-  spineSegments,
-  SPINE_STYLE,
+  daysWithKm,
+  FERRY_NOTE,
+  placeOf,
+  places,
   stageOf,
-} from "./data/traverse";
+  type RideDay,
+} from "./data/ride";
 
 type Props = {
   mapLang: BasemapId;
+  selectedDay: number | null;
+  onSelectDay: (n: number) => void;
 };
 
-export default function LandLineMap({ mapLang }: Props) {
+const FERRY_STYLE = { color: "#6b5b95", weight: 3, opacity: 0.9, dashArray: "8 7" };
+
+export default function LandLineMap({ mapLang, selectedDay, onSelectDay }: Props) {
   const mapEl = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
   const tileRef = useRef<L.TileLayer | null>(null);
   const layerRef = useRef<L.LayerGroup | null>(null);
+  const selectRef = useRef(onSelectDay);
+  selectRef.current = onSelectDay;
 
   useEffect(() => {
     if (!mapEl.current || mapRef.current) return;
 
     const map = L.map(mapEl.current, {
       zoomControl: true,
-      scrollWheelZoom: false,
+      scrollWheelZoom: true,
       attributionControl: true,
     });
 
     layerRef.current = L.layerGroup().addTo(map);
     mapRef.current = map;
 
+    const soya = places.soya;
+    const sata = places.sata;
     map.fitBounds(
       L.latLngBounds([
-        [poles.sata.lat, poles.sata.lng],
-        [poles.soya.lat, poles.soya.lng],
-      ]).pad(0.15),
+        [soya.lat, soya.lng],
+        [sata.lat, sata.lng],
+      ]).pad(0.18),
     );
 
     return () => {
@@ -52,12 +59,10 @@ export default function LandLineMap({ mapLang }: Props) {
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-
     if (tileRef.current) {
       map.removeLayer(tileRef.current);
       tileRef.current = null;
     }
-
     const spec = basemaps[mapLang];
     tileRef.current = L.tileLayer(spec.url, {
       attribution: spec.attribution,
@@ -70,75 +75,79 @@ export default function LandLineMap({ mapLang }: Props) {
     if (!layer) return;
     layer.clearLayers();
 
-    // The joke line: a straight great circle, NOT a GPS route.
-    L.polyline(
-      placeholderLine.map(([lat, lng]) => L.latLng(lat, lng)),
-      { color: "#8a8680", weight: 2, opacity: 0.7, dashArray: "2 9", lineCap: "round" },
-    )
-      .bindTooltip("Straight-line placeholder — the ride is not this line.", {
-        sticky: true,
-        opacity: 0.95,
-      })
-      .addTo(layer);
-
-    // The overview spine: solid vermillion ride, dashed only for train / ferry.
-    for (const seg of spineSegments) {
-      const from = gatewayOf(seg.from);
-      const to = gatewayOf(seg.to);
-      const style = SPINE_STYLE[seg.mode];
-      L.polyline(
-        [L.latLng(from.lat, from.lng), L.latLng(to.lat, to.lng)],
+    function addDayLine(day: RideDay) {
+      const from = placeOf(day.from);
+      const to = placeOf(day.to);
+      const stage = stageOf(day.stageId);
+      const line = L.polyline(
+        [
+          [from.lat, from.lng],
+          [to.lat, to.lng],
+        ],
         {
-          color: style.color,
-          weight: style.weight,
+          color: selectedDay === day.n ? "#B23A1E" : stage.color,
+          weight: selectedDay === day.n ? 6 : 4,
           opacity: 0.95,
-          dashArray: style.dash,
           lineCap: "round",
         },
-      )
-        .bindTooltip(
-          `${from.name} → ${to.name} · ${style.label}${seg.note ? `<br/>${seg.note}` : ""}`,
-          { sticky: true, opacity: 0.95 },
-        )
-        .addTo(layer);
+      );
+      line.on("click", () => selectRef.current(day.n));
+      line.bindTooltip(
+        `Day ${day.n} · ${from.name} → ${to.name}<br/>${day.km} km · ${day.climbM} m`,
+        { sticky: true },
+      );
+      line.addTo(layer!);
     }
 
-    // Gateways between the poles.
-    for (const g of gateways) {
-      if (g.id === "sata" || g.id === "soya") continue;
-      const stage = stageOf(g.stage);
-      L.circleMarker([g.lat, g.lng], {
-        radius: 6,
-        color: "#1a1814",
-        weight: 1,
-        fillColor: stage.color,
-        fillOpacity: 1,
-      })
-        .bindTooltip(
-          `<strong>${g.name}</strong> ${g.nameJa}<br/>${stage.name} · ${stage.kana}`,
-          { direction: "top", opacity: 0.95 },
+    for (const day of daysWithKm) {
+      addDayLine(day);
+      if (day.ferryAfter) {
+        const from = placeOf(day.to);
+        const next = daysWithKm.find((d) => d.n === day.n + 1);
+        if (!next) continue;
+        const to = placeOf(next.from);
+        L.polyline(
+          [
+            [from.lat, from.lng],
+            [to.lat, to.lng],
+          ],
+          FERRY_STYLE,
         )
-        .addTo(layer);
+          .bindTooltip(FERRY_NOTE[day.ferryAfter], { sticky: true })
+          .addTo(layer);
+      }
     }
 
-    // The two poles, larger and labelled.
-    for (const pole of [poles.sata, poles.soya]) {
+    for (const pole of [places.soya, places.sata]) {
       L.circleMarker([pole.lat, pole.lng], {
-        radius: 10,
+        radius: 9,
         color: "#1a1814",
         weight: 2,
-        fillColor: "#c4452d",
+        fillColor: "#B23A1E",
         fillOpacity: 1,
       })
-        .bindTooltip(
-          `<strong>${pole.name}</strong> ${pole.nameJa}<br/>${
-            pole.role === "start" ? "South pole · start" : "North pole · end"
-          }`,
-          { direction: "top", opacity: 0.95, permanent: false },
-        )
+        .bindTooltip(`<strong>${pole.name}</strong> ${pole.nameJa}`, {
+          direction: "top",
+        })
         .addTo(layer);
     }
-  }, []);
+  }, [selectedDay]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || selectedDay == null) return;
+    const day = daysWithKm.find((d) => d.n === selectedDay);
+    if (!day) return;
+    const from = placeOf(day.from);
+    const to = placeOf(day.to);
+    map.fitBounds(
+      L.latLngBounds([
+        [from.lat, from.lng],
+        [to.lat, to.lng],
+      ]).pad(0.35),
+      { animate: true, maxZoom: 9 },
+    );
+  }, [selectedDay]);
 
   return (
     <div className="map-shell">
@@ -153,22 +162,18 @@ export default function LandLineMap({ mapLang }: Props) {
         }
       />
       <div className="map-legend">
-        <p className="map-legend-title">Land line</p>
+        <p className="map-legend-title">Overnight hops</p>
         <span className="legend-item">
-          <i className="legend-line" style={{ background: SPINE_STYLE.ride.color }} />
-          Planned ride
+          <i className="legend-line" style={{ background: "#7FA8B8" }} />
+          Riding day
         </span>
         <span className="legend-item">
-          <i className="legend-line dashed" style={{ background: SPINE_STYLE.ferry.color }} />
-          Ferry (access)
+          <i className="legend-line dashed" style={{ background: "#6b5b95" }} />
+          Ferry
         </span>
         <span className="legend-item">
-          <i className="legend-line ghost" style={{ background: "#8a8680" }} />
-          Straight-line placeholder
-        </span>
-        <span className="legend-item">
-          <i style={{ background: "#c4452d" }} />
-          Pole (Sata / Soya)
+          <i style={{ background: "#B23A1E" }} />
+          Pole
         </span>
       </div>
     </div>
