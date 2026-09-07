@@ -2,7 +2,9 @@
 
 This document is the product brief for **JAPMAP**: a site that tells one original bicycle journey across Japan, pole to pole. It is based on a full read of [japanride.pages.dev](https://japanride.pages.dev/) (source: [tigges/JAPANRIDE](https://github.com/tigges/JAPANRIDE)) and on the sibling decision already in flight there: a continuous grand tour is a **separate project**.
 
-The Claude artifact [Pole to Pole Wireframes](https://claude.ai/code/artifact/2dcf6686-0e9e-42e8-8e77-51a228e59f40) is a signed-in Claude Code frame (`/api/frame/{uuid}`). From this environment the shell loads and the iframe host is known (`2dcf6686-0e9e-42e8-8e77-51a228e59f40.frame.claudeusercontent.com`), but the artifact body itself is not public HTML. The concept below therefore treats that artifact as the **interaction spec to implement against** (multi-screen wireframes for the original traverse) and treats JapanRide as the **craft and data-layer spec to reuse**. Open the artifact while building; do not invent a third IA.
+The Claude URL [Pole to Pole Wireframes](https://claude.ai/code/artifact/2dcf6686-0e9e-42e8-8e77-51a228e59f40) is a **private Claude Code frame**, not a published artifact. Unauthenticated fetch returns Claude’s “Page not found” page (`title: Page not found – Claude`). The frame host `2dcf6686-0e9e-42e8-8e77-51a228e59f40.frame.claudeusercontent.com` exists in the shell HTML but answers `not found` without a session token from `/api/frame/{uuid}`.
+
+This brief therefore uses JapanRide as the **craft and data-layer spec**, and the usual pole-to-pole geography (佐多岬 → 宗谷岬) as the **story spec**. If you re-share the wireframes (public artifact, screenshots, or a gist of the HTML), layout and nav should follow those screens; this document still wins on geography (see §11).
 
 ---
 
@@ -369,7 +371,13 @@ When that is true, thicken the line. Not before.
 
 ## 11. Artifact follow-up
 
-When building screens, keep [the Pole to Pole wireframes](https://claude.ai/code/artifact/2dcf6686-0e9e-42e8-8e77-51a228e59f40) open and match:
+The wireframe URL is not readable without a Claude login. What we could confirm:
+
+- Path shape: `/code/artifact/{uuid}` (Claude Code iframe shell, not `/public/artifacts/`)
+- Unauthenticated result: **Page not found**
+- Title in the user’s request: “Pole to Pole Wireframes”
+
+Until that HTML is re-shared, implement the IA in §4. When the screens are available, match:
 
 - Screen names and nav order
 - Any labelled stats, stage names, and map chrome
