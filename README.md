@@ -19,4 +19,13 @@ Shared craft (type, paper palette, Leaflet, EN/JA basemaps, segment schema) shou
 
 ## Status
 
-Planning. No app yet. See the concept doc for information architecture, data model, and build phases.
+**Phase 0 skeleton.** A runnable Vite + React + TypeScript + Leaflet app lives in `src/`: home, map, and about routes; Cape Sata and Cape Soya markers; the six stage gateways strung south to north with a solid vermillion spine; a dashed placeholder great-circle that exists only to prove the ride is *not* that line; and EN / 日本語 basemaps. See the concept doc for the full information architecture, data model, and remaining build phases.
+
+## Develop
+
+```bash
+npm ci        # install (uses package-lock.json)
+npm run dev   # dev server on http://localhost:5173
+npm test      # vitest
+npm run build # type-check + production build to dist/
+```
