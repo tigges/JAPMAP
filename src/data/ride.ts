@@ -421,6 +421,32 @@ export function daysOfStage(id: StageId): RideDay[] {
   return rideDays.filter((d) => d.stageId === id);
 }
 
+/** Banner line used on stage and day detail pages. */
+export const STAGE_SUBTITLE: Record<StageId, string> = {
+  hokkaido: "Cape-to-cape route · Sea of Japan side",
+  tohoku: "Cape-to-cape route · Sea of Japan side",
+  hokuriku: "Cape-to-cape route · Sea of Japan side",
+  cutacross: "Cape-to-cape route · inland cut-across",
+  sanyo: "Cape-to-cape route · Inland Sea / San’yō",
+  kyushu: "Cape-to-cape route · east coast of Kyūshū",
+  satsuma: "Cape-to-cape route · Satsuma run-in",
+};
+
+export function stageDayOrdinal(day: RideDay): { index: number; of: number } {
+  const days = daysOfStage(day.stageId);
+  return { index: days.findIndex((d) => d.n === day.n) + 1, of: days.length };
+}
+
+/** Cumulative km along the overnight itinerary of this stage (not the headline stage km). */
+export function stageKmProgress(day: RideDay): { start: number; end: number } {
+  let start = 0;
+  for (const d of daysOfStage(day.stageId)) {
+    if (d.n === day.n) return { start, end: start + d.km };
+    start += d.km;
+  }
+  return { start: 0, end: day.km };
+}
+
 export function placeOf(id: PlaceId): Place {
   return places[id];
 }
