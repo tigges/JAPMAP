@@ -24,7 +24,7 @@ Open PR [#7](https://github.com/tigges/JAPANRIDE/pull/7) on that repo already sp
 
 ### What the live site does well
 
-- **One-page editorial map.** Sticky nav (Journey / Chapters / Watch / Ride notes), full-bleed NHK still as hero, vermillion CTA into the map.
+- **One-page editorial map.** Sticky nav (Journey / Chapters / Watch / Ride notes), site version in the wordmark (live is **V19**), full-bleed NHK still as hero when the WORLD CDN allows it, vermillion CTA into the map. Without that still the hero is a paper-to-charcoal veil — JAPMAP should not depend on NHK images at all.
 - **Honest catalog graph.** 58 hubs, ~100 episodes, 2014–2026. Lines between hubs are *jumps*, not GPS: vermillion ride, gold train, purple ferry, grey flight. Island trips (Sado, Niijima, Goto, Yakushima, Amami, Okinawa, Miyako, Yaeyama) hang off gateways; they are not stages of the land line.
 - **Two map depths.** Overview = hubs + jumps. Thirteen hubs open a **color-coded episode map** (waypoints, days, overnight dots, official-route teal underlay). Day pills filter the drawn segments.
 - **Bilingual tiles without an API key.** English default = Esri World Topo. 日本語 = GSI pale. Preference stored in `localStorage`.
