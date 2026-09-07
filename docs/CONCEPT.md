@@ -371,17 +371,11 @@ When that is true, thicken the line. Not before.
 
 ## 11. Artifact follow-up
 
-The wireframe URL is not readable without a Claude login. What we could confirm:
+Two Claude Code artifacts were cited.
 
-- Path shape: `/code/artifact/{uuid}` (Claude Code iframe shell, not `/public/artifacts/`)
-- Unauthenticated result: **Page not found**
-- Title in the user’s request: “Pole to Pole Wireframes”
+1. [Earlier “Pole to Pole Wireframes”](https://claude.ai/code/artifact/2dcf6686-0e9e-42e8-8e77-51a228e59f40) — still unread without a session (`/api/frame` 403; frame host 404).
+2. [Pole to Pole](https://claude.ai/code/artifact/8faa6591-a0cd-4b0f-8dd2-9a5f4c251e3c) — **readable** at the same URL with `?chrome=none`. Single-page scrollytelling of a **routed** Sōya → Sata ride (3,461 km, 42 days, west-coast / San’yō line). Layout and geography both disagree with this brief.
 
-Until that HTML is re-shared, implement the IA in §4. When the screens are available, match:
+The Phase 0 app followed this document (Sata → Soya, six interior stages, JapanRide paper chrome). That is what is live.
 
-- Screen names and nav order
-- Any labelled stats, stage names, and map chrome
-- Empty vs populated journal
-- How layers are named in the UI
-
-If a wireframe disagrees with this brief, **the wireframe wins on layout; this brief wins on geography** (Sata → Soya, islands off the land line, no NHK stills). Note the disagreement in the PR rather than silently mixing the two.
+**V2:** treat artifact (2) as the product reference. Full analysis, the geography fork, and the recommended IA are in [V2.md](./V2.md). Short version: the artifact wins on layout **and** on the land line (it is the first itinerary with real days); this brief still wins on islands-off-the-line, no NHK stills, and ferry honesty.
