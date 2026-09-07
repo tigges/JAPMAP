@@ -126,7 +126,7 @@ export const STAGE_NOTES: Record<StageId, string> = {
   sanyo:
     "Himeji keep, the San’yō coast to Onomichi's temple slope, then Yanai's white-wall streets. The Shimanami bridges leave from Onomichi toward Imabari — islands off the land line.",
   kyushu:
-    "East coast of Kyūshū to the pole. Usuki's stone Buddhas sit on this hop; Beppu is just north; the Yamanami Highway is inland and off this day's road.",
+    "East coast of Kyūshū to Cape Sata. Usuki's stone Buddhas sit on this hop; Beppu is just north; the Yamanami Highway is inland and off this day's road.",
   satsuma:
-    "After the southern pole, the run-in to Kagoshima looks across the water at Sakurajima.",
+    "After Cape Sata, the run-in to Kagoshima looks across the water at Sakurajima.",
 };

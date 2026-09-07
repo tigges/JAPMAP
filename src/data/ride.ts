@@ -356,14 +356,16 @@ export const rideDays: RideDay[] = [
 export const FERRY_NOTE: Record<NonNullable<RideDay["ferryAfter"]>, string> = {
   tsugaru: "Tsugaru Strait ferry — Hakodate to Aomori. Access, not a ridden road.",
   kanmon: "Kanmon Straits — Shimonoseki to Mōji.",
-  "kagoshima-bay": "Kagoshima Bay ferry — Ōsumi to Satsuma after the southern pole.",
+  "kagoshima-bay": "Kagoshima Bay ferry — Ōsumi to Satsuma after Cape Sata.",
 };
 
-/** Published route-map headlines from the Pole to Pole artifact. */
+/** Published route-map headlines; the site frames the ride as biking Sōya to Sata. */
 export const ride = {
   id: "soya-sata" as const,
-  title: "Pole to Pole",
-  titleJa: "極から極へ",
+  title: "Biking from Cape Sōya to Cape Sata",
+  titleJa: "宗谷岬から佐多岬へ",
+  titleKicker: "Biking from",
+  titlePlaces: "Cape Sōya to Cape Sata",
   direction: "north-to-south" as const,
   from: "soya" as PlaceId,
   to: "sata" as PlaceId,

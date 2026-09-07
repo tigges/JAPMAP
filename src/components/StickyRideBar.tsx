@@ -5,8 +5,9 @@ import { daysWithKm, dayKmSum, maxEffort, ride, stageOf } from "../data/ride";
 export default function StickyRideBar() {
   return (
     <header className="sticky-bar">
-      <Link className="sticky-wordmark" to="/">
-        Pole to Pole
+      <Link className="sticky-wordmark" to="/" aria-label={ride.title}>
+        <span className="sticky-kicker">{ride.titleKicker}</span>
+        {ride.titlePlaces}
       </Link>
       <div className="sticky-mini" aria-hidden="true">
         {daysWithKm.map((day) => {

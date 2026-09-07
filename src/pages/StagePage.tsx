@@ -6,6 +6,7 @@ import {
   daysOfStage,
   photoUrl,
   placeOf,
+  ride,
   stageOf,
   type StageId,
 } from "../data/ride";
@@ -32,7 +33,7 @@ export default function StagePage() {
   return (
     <article className="detail-page stage-page">
       <p className="detail-crumb">
-        <Link to="/">Across Japan</Link>
+        <Link to="/">{ride.titlePlaces}</Link>
         {" · "}
         Stage {stage.number}, {stage.name}
       </p>

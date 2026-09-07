@@ -157,8 +157,8 @@ export default function LandLineMap({ mapLang, selectedDay, onSelectDay }: Props
         role="application"
         aria-label={
           mapLang === "en"
-            ? "Japan pole-to-pole map, English labels"
-            : "Japan pole-to-pole map, Japanese labels"
+            ? "Map of the bicycle ride from Cape Sōya to Cape Sata, English labels"
+            : "Map of the bicycle ride from Cape Sōya to Cape Sata, Japanese labels"
         }
       />
       <div className="map-legend">
@@ -173,7 +173,7 @@ export default function LandLineMap({ mapLang, selectedDay, onSelectDay }: Props
         </span>
         <span className="legend-item">
           <i style={{ background: "#B23A1E" }} />
-          Pole
+          Cape
         </span>
       </div>
     </div>

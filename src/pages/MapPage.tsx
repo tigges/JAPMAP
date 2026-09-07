@@ -8,7 +8,7 @@ import {
   type BasemapId,
 } from "../data/basemap";
 import { fmtClimb, fmtKm } from "../data/format";
-import { daysWithKm, placeOf, stageOf } from "../data/ride";
+import { daysWithKm, placeOf, ride, stageOf } from "../data/ride";
 
 export default function MapPage() {
   const [mapLang, setMapLang] = useState<BasemapId>(() => {
@@ -38,11 +38,14 @@ export default function MapPage() {
   return (
     <section className="map-page">
       <div className="map-intro">
-        <p className="eyebrow">Overnight towns, Sōya at the top, Sata at the bottom</p>
-        <h1>The land line</h1>
+        <p className="eyebrow">Forty-two days on the bicycle, Sōya at the top</p>
+        <h1>
+          <span className="hero-kicker">{ride.titleKicker}</span>
+          Cape Sōya <em>to</em> Cape Sata
+        </h1>
         <p>
-          Forty-two days as hops between named towns — not the GPS yet. Solid strokes
-          are riding days; dashed purple is a ferry. Click a day to zoom.
+          Overnight hops between named towns — not the GPS yet. Solid strokes are riding
+          days; dashed purple is a ferry. Click a day to zoom.
         </p>
       </div>
       <div className="map-toolbar">

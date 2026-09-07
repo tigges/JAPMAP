@@ -14,6 +14,7 @@ import {
   FERRY_NOTE,
   photoUrl,
   placeOf,
+  ride,
   rideDays,
   stageDayOrdinal,
   stageKmProgress,
@@ -52,7 +53,7 @@ export default function DayPage() {
   return (
     <article className="detail-page day-page">
       <p className="detail-crumb">
-        <Link to="/">Across Japan</Link>
+        <Link to="/">{ride.titlePlaces}</Link>
         {" · "}
         <Link to={`/stages/${stage.id}`}>
           Stage {stage.number}, {stage.name}

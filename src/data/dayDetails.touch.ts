@@ -394,7 +394,7 @@ export const japanRideDayDetails: Record<number, DayDetail> = {
   42: {
     dayN: 42,
     narrative:
-      "After the southern pole, the Satsuma run-in to Kagoshima looks across the water at Sakurajima. Black vinegar country sits in the same basin; this day is the port.",
+      "After Cape Sata, the Satsuma run-in to Kagoshima looks across the water at Sakurajima. Black vinegar country sits in the same basin; this day is the port.",
     photos: photos(
       {
         n: 1,
