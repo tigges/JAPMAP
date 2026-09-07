@@ -183,14 +183,16 @@ export default function DayPage() {
 
       {day.ferryAfter ? <p className="ferry-note">{FERRY_NOTE[day.ferryAfter]}</p> : null}
 
-      <p className="detail-foot">
+      <nav className="detail-foot day-nav" aria-label="Day and stage">
+        <span className="detail-foot-prev">
+          {prev ? <Link to={`/days/${prev.n}`}>← Day {prev.n}</Link> : null}
+        </span>
         <Link to={`/stages/${stage.id}`}>↑ Stage {stage.number} overview</Link>
-        <span>Real, sourced photographs</span>
-      </p>
-      <p className="about-links">
-        {prev ? <Link to={`/days/${prev.n}`}>← Day {prev.n}</Link> : <span />}
-        {next ? <Link to={`/days/${next.n}`}>Day {next.n} →</Link> : <span />}
-      </p>
+        <span className="detail-foot-next">
+          {next ? <Link to={`/days/${next.n}`}>Day {next.n} →</Link> : null}
+        </span>
+      </nav>
+      <p className="detail-credit">Real, sourced photographs</p>
     </article>
   );
 }

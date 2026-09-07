@@ -123,7 +123,7 @@ export default function StagePage() {
 
       <p className="detail-foot">
         <Link to="/#stages">↑ Ride overview</Link>
-        <span>Real, sourced photographs</span>
+        <span className="detail-credit-inline">Real, sourced photographs</span>
       </p>
     </article>
   );

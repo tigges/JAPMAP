@@ -135,7 +135,7 @@ export const dayDetails: Record<number, DayDetail> = {
         kind: "attraction",
         title: "Oshidomari, Rishiri Island",
         subtitle:
-          "island offshore… this is its port town, not the view from the road",
+          "the island offshore for most of the day — this is its port town, not the view from the road",
         file: "day1-06-oshidomari.jpg",
         artist: "OKJaguar",
         license: "CC BY-SA 4.0",

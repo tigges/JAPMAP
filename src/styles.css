@@ -1049,6 +1049,7 @@ img {
 .detail-foot {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 1rem;
   margin-top: 1.6rem;
   padding-top: 1rem;
@@ -1056,12 +1057,28 @@ img {
   font-size: 0.9rem;
 }
 
+.detail-foot.day-nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+}
+
 .detail-foot a {
   text-decoration: none;
 }
 
-.detail-foot span {
+.detail-foot-next {
+  text-align: right;
+}
+
+.detail-credit,
+.detail-credit-inline {
   color: var(--faint);
+  font-size: 0.82rem;
+}
+
+.detail-credit {
+  text-align: center;
+  margin-top: 0.65rem;
 }
 
 .leaflet-container {
