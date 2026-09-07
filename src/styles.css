@@ -129,8 +129,6 @@ img {
 
 .hero-v2 h1,
 .about-page h1,
-.stage-page h1,
-.day-page h1,
 .map-intro h1 {
   font-size: clamp(3.4rem, 8vw, 6.4rem);
   font-weight: 800;
@@ -670,15 +668,11 @@ img {
   font-size: 0.85rem;
 }
 
-.about-page,
-.stage-page,
-.day-page {
+.about-page {
   padding-top: 2.2rem;
 }
 
-.about-page h1,
-.stage-page h1,
-.day-page h1 {
+.about-page h1 {
   font-size: clamp(2.4rem, 5vw, 4.2rem);
 }
 
@@ -738,31 +732,336 @@ img {
   color: var(--muted);
 }
 
-.day-facts {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin: 1.4rem 0;
+.detail-page {
+  padding-top: 1.4rem;
 }
 
-.day-facts dt {
+.detail-crumb {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 0.85rem;
+}
+
+.detail-crumb a {
+  text-decoration: none;
+}
+
+.detail-crumb a:hover {
+  color: var(--ink);
+}
+
+.detail-banner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: end;
+  gap: 1.5rem 2.2rem;
+  padding: 1.35rem 1.5rem 1.25rem;
+  color: #fff;
+  margin-bottom: 1.6rem;
+}
+
+.detail-banner-kicker {
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  padding-bottom: 0.35rem;
+}
+
+.detail-banner-sub {
+  font-size: 0.78rem;
+  opacity: 0.82;
+  margin-bottom: 0.25rem;
+}
+
+.detail-banner h1 {
+  font-size: clamp(1.6rem, 3.4vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.detail-intro {
+  display: grid;
+  grid-template-columns: 1.55fr 0.95fr;
+  gap: 1.6rem 2rem;
+  margin-bottom: 1.6rem;
+}
+
+.detail-narrative p {
+  font-family: var(--serif);
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: #333;
+}
+
+.this-day {
+  background: #e7eef0;
+  padding: 1.05rem 1.15rem 1.15rem;
+}
+
+.this-day h2 {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #4a6670;
+  margin-bottom: 0.7rem;
+}
+
+.this-day dl {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.this-day dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6a8088;
+}
+
+.this-day dd {
+  font-weight: 650;
+  font-size: 0.98rem;
+}
+
+.this-day small {
+  display: block;
+  font-weight: 400;
+  color: #5c727a;
+  font-size: 0.8rem;
+}
+
+.detail-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+  margin: 0.4rem 0 1.6rem;
+  padding: 0.4rem 0 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-stats dt {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-bottom: 0.15rem;
+}
+
+.detail-stats dd {
+  font-size: clamp(2rem, 4vw, 2.7rem);
+  font-weight: 750;
+  letter-spacing: -0.03em;
+}
+
+.detail-viz {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1rem 1.2rem;
+  margin-bottom: 2rem;
+  align-items: start;
+}
+
+.day-elev svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #f7f5f1;
+}
+
+.elev-label {
+  font-size: 11px;
+  fill: #8a8a8a;
+  font-family: var(--sans);
+}
+
+.elev-anno {
+  font-size: 11px;
+  fill: #2c6b7f;
+  font-family: var(--sans);
+}
+
+.elev-empty {
+  font-size: 13px;
+  fill: #8a8a8a;
+  font-family: var(--serif);
+}
+
+.grade-legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1rem;
+  margin-top: 0.45rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.grade-legend i {
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.55rem;
+  margin-right: 0.35rem;
+  vertical-align: middle;
+}
+
+.elev-caption {
+  font-size: 0.75rem;
+  color: var(--faint);
+  margin-top: 0.4rem;
+}
+
+.day-inset-map {
+  width: 100%;
+  height: 260px;
+  background: #d9e3d4;
+}
+
+.day-pin-wrap {
+  background: none !important;
+  border: 0 !important;
+}
+
+.day-pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #2c6b7f;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.pin-caption {
   font-size: 0.68rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--faint);
+  margin-top: 0.45rem;
 }
 
-.day-facts dd {
-  font-size: 1.6rem;
-        font-weight: 700;
+.photo-block {
+  margin-bottom: 1.6rem;
 }
 
-.empty-photo {
+.photo-block h2 {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 0.7rem;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+
+.photo-card {
+  position: relative;
+  background: #fff;
+}
+
+.photo-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.photo-num {
+  position: absolute;
+  top: 0.55rem;
+  left: 0.55rem;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 50%;
+  background: #2c6b7f;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.photo-num.muted {
+  background: #9aa8ad;
+}
+
+.photo-card figcaption {
+  padding: 0.7rem 0.75rem 0.85rem;
+}
+
+.photo-card strong {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.photo-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin: 0.15rem 0 0.35rem;
+}
+
+.photo-card small {
+  color: var(--faint);
+  font-size: 0.72rem;
+}
+
+.photo-card.empty .photo-ph {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  text-align: center;
   font-family: var(--serif);
   color: var(--muted);
-  padding: 2rem 0;
-  border-top: 1px dashed var(--line);
-  border-bottom: 1px dashed var(--line);
+  background: repeating-linear-gradient(
+    -45deg,
+    #f4f2ee,
+    #f4f2ee 8px,
+    #efece6 8px,
+    #efece6 16px
+  );
+}
+
+.hardest-callout {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: #333;
+  padding: 0.9rem 0 0.9rem 1rem;
+  border-left: 3px solid #2c6b7f;
+  margin: 0.4rem 0 1.4rem;
+}
+
+.detail-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+
+.detail-foot a {
+  text-decoration: none;
+}
+
+.detail-foot span {
+  color: var(--faint);
 }
 
 .leaflet-container {
@@ -793,8 +1092,16 @@ img {
   .method,
   .map-layout,
   .pole-coords,
-  .day-facts {
+  .detail-intro,
+  .detail-stats,
+  .detail-viz,
+  .photo-grid {
     grid-template-columns: 1fr;
+  }
+
+  .detail-banner {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
   }
 
   .stats-v2 div {
