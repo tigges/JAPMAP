@@ -6,7 +6,8 @@ This is **not** the NHK *Cycle Around Japan* catalog. That companion lives at [j
 
 **Live:** [tigges.github.io/JAPMAP](https://tigges.github.io/JAPMAP/)
 
-**Concept and implementation plan:** [docs/CONCEPT.md](docs/CONCEPT.md)
+**Concept (Phase 0):** [docs/CONCEPT.md](docs/CONCEPT.md)
+**V2 recommendation:** [docs/V2.md](docs/V2.md)
 
 ## Sibling, not a fork of the catalog
 
