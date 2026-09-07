@@ -4,6 +4,8 @@ An original bicycle traverse of Japan, **Cape Sata → Cape Soya**, with optiona
 
 This is **not** the NHK *Cycle Around Japan* catalog. That companion lives at [japanride.pages.dev](https://japanride.pages.dev/). JAPMAP is the separate grand-tour site that catalog pointed toward: one ride, two poles, honest about trains, ferries, and official cycle routes.
 
+**Live:** [tigges.github.io/JAPMAP](https://tigges.github.io/JAPMAP/)
+
 **Concept and implementation plan:** [docs/CONCEPT.md](docs/CONCEPT.md)
 
 ## Sibling, not a fork of the catalog
@@ -19,7 +21,9 @@ Shared craft (type, paper palette, Leaflet, EN/JA basemaps, segment schema) shou
 
 ## Status
 
-**Phase 0 skeleton.** A runnable Vite + React + TypeScript + Leaflet app lives in `src/`: home, map, and about routes; Cape Sata and Cape Soya markers; the six stage gateways strung south to north with a solid vermillion spine; a dashed placeholder great-circle that exists only to prove the ride is *not* that line; and EN / 日本語 basemaps. See the concept doc for the full information architecture, data model, and remaining build phases.
+**Phase 0 skeleton.** Live at [tigges.github.io/JAPMAP](https://tigges.github.io/JAPMAP/). A runnable Vite + React + TypeScript + Leaflet app lives in `src/`: home, map, and about routes; Cape Sata and Cape Soya markers; the six stage gateways strung south to north with a solid vermillion spine; a dashed placeholder great-circle that exists only to prove the ride is *not* that line; and EN / 日本語 basemaps. See the concept doc for the full information architecture, data model, and remaining build phases.
+
+GitHub Pages is published from `main` by [`.github/workflows/pages.yml`](.github/workflows/pages.yml) (builds `dist`, base path `/JAPMAP/`). Repo Settings → Pages → Source must be **GitHub Actions**, not “Deploy from a branch”.
 
 ## Develop
 
