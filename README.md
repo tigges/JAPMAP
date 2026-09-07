@@ -1,30 +1,18 @@
-# JAPMAP — Japan Pole to Pole
+# JAPMAP — Pole to Pole
 
-An original bicycle traverse of Japan, **Cape Sata → Cape Soya**, with optional island packages after the land line.
+An original bicycle traverse of Japan, **Cape Sōya → Cape Sata**, forty-two riding days on the west coast and San’yō, with a run-in to Kagoshima after the southern pole.
 
-This is **not** the NHK *Cycle Around Japan* catalog. That companion lives at [japanride.pages.dev](https://japanride.pages.dev/). JAPMAP is the separate grand-tour site that catalog pointed toward: one ride, two poles, honest about trains, ferries, and official cycle routes.
+This is **not** the NHK *Cycle Around Japan* catalog. That companion lives at [japanride.pages.dev](https://japanride.pages.dev/).
 
 **Live:** [tigges.github.io/JAPMAP](https://tigges.github.io/JAPMAP/)
 
-**Concept (Phase 0):** [docs/CONCEPT.md](docs/CONCEPT.md)
-**V2 recommendation:** [docs/V2.md](docs/V2.md)
-
-## Sibling, not a fork of the catalog
-
-| | JAPANRIDE | JAPMAP |
-| --- | --- | --- |
-| Job | Map NHK episode rides and send you to watch them | Tell one original pole-to-pole journey |
-| Line on the map | Catalog hops (ride / train / ferry / flight) | A continuous planned traverse |
-| Ends | Hubs from Shiretoko to Yaeyama | Mainland poles: 佐多岬 → 宗谷岬 |
-| Islands | Separate NHK packages | Optional second act after Kagoshima |
-
-Shared craft (type, paper palette, Leaflet, EN/JA basemaps, segment schema) should transfer. NHK stills, episode titles, and “this is the series as one GPS line” must not.
+**V2 brief:** [docs/V2.md](docs/V2.md) · **Phase 0 concept:** [docs/CONCEPT.md](docs/CONCEPT.md)
 
 ## Status
 
-**Phase 0 skeleton.** Live at [tigges.github.io/JAPMAP](https://tigges.github.io/JAPMAP/). A runnable Vite + React + TypeScript + Leaflet app lives in `src/`: home, map, and about routes; Cape Sata and Cape Soya markers; the six stage gateways strung south to north with a solid vermillion spine; a dashed placeholder great-circle that exists only to prove the ride is *not* that line; and EN / 日本語 basemaps. See the concept doc for the full information architecture, data model, and remaining build phases.
+**V2.** Single-page ride log from the [Pole to Pole artifact](https://claude.ai/code/artifact/8faa6591-a0cd-4b0f-8dd2-9a5f4c251e3c): sticky stage bar, 3,461 km / 42 days, day-effort chart, seven stage photographs, every overnight, and a map of town-to-town hops. JapanRide lives on About. Photographs are Wikimedia Commons, credited on the page.
 
-GitHub Pages is published from `main` by [`.github/workflows/pages.yml`](.github/workflows/pages.yml) (builds `dist`, base path `/JAPMAP/`). Repo Settings → Pages → Source must be **GitHub Actions**, not “Deploy from a branch”.
+GitHub Pages is published from `main` by [`.github/workflows/pages.yml`](.github/workflows/pages.yml) (builds `dist`, base path `/JAPMAP/`).
 
 ## Develop
 

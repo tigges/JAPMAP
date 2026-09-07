@@ -1,55 +1,60 @@
-const JAPANRIDE_URL = "https://japanride.pages.dev/";
+import { Link } from "react-router-dom";
+import { fmtInt } from "../data/format";
+import { JAPANRIDE_URL, ride } from "../data/ride";
 
 export default function About() {
   return (
-    <section className="ride" id="about">
-      <div className="section-head">
-        <p className="eyebrow">What this is, and what it is not</p>
-        <h2>Sibling, not a fork</h2>
-      </div>
+    <article className="about-page">
+      <p className="eyebrow">What this is</p>
+      <h1>One road. Two poles.</h1>
+      <p className="lede">
+        JAPMAP is an original bicycle traverse of Japan, from the monument at Cape Sōya
+        to the lighthouse at Cape Sata. {fmtInt(ride.km)} kilometres, {ride.ridingDays}{" "}
+        riding days, seven stages, three ferries. It is a journey narrative with a map —
+        not a route planner, and not a video index.
+      </p>
+
       <div className="notes">
         <article>
-          <h3>One ride, two poles</h3>
+          <h2>North to south, on the west coast</h2>
           <p>
-            JAPMAP is one original bicycle traverse of Japan, Cape Sata to Cape Soya.
-            It is a journey narrative with a map — not a route planner, and not a
-            video-on-demand index.
+            Kilometre zero is Cape Sōya. The land line follows the Sea of Japan to
+            Kanazawa, cuts across to Ōsaka, then the San’yō coast to Shimonoseki and the
+            east coast of Kyūshū to Sata. Stage 9 is the run-in from Yamagawa to
+            Kagoshima: Sata is a dead-end, so the ride returns to a port.
           </p>
         </article>
         <article>
-          <h3>Honest about trains and ferries</h3>
+          <h2>Honest about boats</h2>
           <p>
-            When the mountains close — Kii, the Alps — the rider takes the train, and
-            the map says so. The Tsugaru Strait to Hokkaido is a ferry, drawn dashed,
-            never a filmed road.
+            Two gaps in the stage numbering are ferries — the Tsugaru Strait and
+            Kagoshima Bay. A third crossing is the Kanmon Straits. None of them is drawn
+            as a road.
           </p>
         </article>
         <article>
-          <h3>Islands are a second act</h3>
+          <h2>Islands are a second act</h2>
           <p>
-            Yakushima, Amami, Okinawa, Miyako, and Yaeyama are optional packages after
-            Kagoshima. They are not stages of the land line, and this site does not
-            pretend otherwise.
+            Yakushima, Amami, Okinawa, Miyako, and Yaeyama are not stages of this line.
+            They stay optional packages after Kagoshima.
           </p>
         </article>
         <article>
-          <h3>Not the NHK series</h3>
+          <h2>Not the NHK series</h2>
           <p>
             This is not <em>Cycle Around Japan</em>. That catalog has its own companion,{" "}
             <a href={JAPANRIDE_URL} target="_blank" rel="noreferrer">
               JAPANRIDE
             </a>
-            . JAPMAP borrows its craft — type, paper palette, Leaflet, EN/JA basemaps —
-            but never its NHK stills or episode titles.
+            . Watch episodes there. This site does not use NHK stills or episode titles.
           </p>
         </article>
       </div>
-      <blockquote>
-        “One rider. Two capes. A land line that prefers official cycle routes, takes the
-        train when the mountains close, and treats NHK episode days as optional detours —
-        never as the GPS.”
-        <cite>JAPMAP concept · docs/CONCEPT.md</cite>
-      </blockquote>
-    </section>
+
+      <p className="about-links">
+        <Link to="/">Back to the ride</Link>
+        <Link to="/map">Open the map</Link>
+      </p>
+    </article>
   );
 }

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import LandLineMap from "../LandLineMap";
 import {
   basemaps,
@@ -6,7 +7,8 @@ import {
   MAP_LANG_KEY,
   type BasemapId,
 } from "../data/basemap";
-import { gateways, spineSegments, stageOf } from "../data/traverse";
+import { fmtClimb, fmtKm } from "../data/format";
+import { daysWithKm, placeOf, stageOf } from "../data/ride";
 
 export default function MapPage() {
   const [mapLang, setMapLang] = useState<BasemapId>(() => {
@@ -17,6 +19,12 @@ export default function MapPage() {
       return "en";
     }
   });
+  const [selected, setSelected] = useState<number | null>(null);
+
+  const selectedDay = useMemo(
+    () => daysWithKm.find((d) => d.n === selected) ?? null,
+    [selected],
+  );
 
   function chooseMapLang(id: BasemapId) {
     setMapLang(id);
@@ -28,19 +36,15 @@ export default function MapPage() {
   }
 
   return (
-    <section className="map-section" id="map">
-      <div className="section-head">
-        <p className="eyebrow">The whole line, Sata at the bottom, Soya at the top</p>
-        <h2>The land line</h2>
+    <section className="map-page">
+      <div className="map-intro">
+        <p className="eyebrow">Overnight towns, Sōya at the top, Sata at the bottom</p>
+        <h1>The land line</h1>
         <p>
-          Phase 0: two poles, the stage gateways between them, and a solid vermillion
-          spine. The faint dashed line is a straight great circle — a placeholder to
-          make the point that the real ride is <em>not</em> that line. The one dashed
-          purple hop is the Tsugaru Strait ferry: part of the land line as access,
-          never a filmed road.
+          Forty-two days as hops between named towns — not the GPS yet. Solid strokes
+          are riding days; dashed purple is a ferry. Click a day to zoom.
         </p>
       </div>
-
       <div className="map-toolbar">
         <div className="lang-pills" role="radiogroup" aria-label="Map labels">
           <span className="lang-label">Map labels</span>
@@ -57,38 +61,45 @@ export default function MapPage() {
             </button>
           ))}
         </div>
+        {selectedDay ? (
+          <Link className="map-day-link" to={`/days/${selectedDay.n}`}>
+            Day {selectedDay.n} notes →
+          </Link>
+        ) : null}
       </div>
-
       <div className="map-layout">
-        <LandLineMap mapLang={mapLang} />
+        <LandLineMap mapLang={mapLang} selectedDay={selected} onSelectDay={setSelected} />
         <aside className="stop-panel">
-          <p className="stop-kicker">Sata → Soya · south to north</p>
-          <h3>Stage gateways</h3>
+          <p className="stop-kicker">North to south · 42 days</p>
+          <h2>Days</h2>
           <ol className="stop-list">
-            {gateways.map((g, i) => {
-              const stage = stageOf(g.stage);
+            {daysWithKm.map((day) => {
+              const stage = stageOf(day.stageId);
+              const from = placeOf(day.from);
+              const to = placeOf(day.to);
               return (
-                <li key={g.id}>
-                  <span className="stop-row static">
-                    <span className="idx">{String(i + 1).padStart(2, "0")}</span>
+                <li key={day.n}>
+                  <button
+                    type="button"
+                    className={selected === day.n ? "stop-row on" : "stop-row"}
+                    onClick={() => setSelected(day.n)}
+                  >
+                    <span className="idx" style={{ color: stage.color }}>
+                      {String(day.n).padStart(2, "0")}
+                    </span>
                     <span>
                       <strong>
-                        {g.name} <small className="ja">{g.nameJa}</small>
+                        {from.name} → {to.name}
                       </strong>
-                      <small style={{ color: stage.color }}>
-                        {stage.name} · {stage.kana}
+                      <small>
+                        {fmtKm(day.km)} km · {fmtClimb(day.climbM)} · stage {stage.number}
                       </small>
                     </span>
-                  </span>
+                  </button>
                 </li>
               );
             })}
           </ol>
-          <p className="muted tight">
-            {spineSegments.length} spine segments ·{" "}
-            {spineSegments.filter((s) => s.mode === "ferry").length} ferry crossing.
-            Days, overnights, and official-route underlays arrive in later phases.
-          </p>
         </aside>
       </div>
     </section>
