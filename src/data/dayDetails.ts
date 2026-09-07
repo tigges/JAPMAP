@@ -1,3 +1,4 @@
+import { japanRideDayDetails } from "./dayDetails.touch";
 import { STAGE_SUBTITLE, type PhotoCredit, type StageId } from "./ride";
 
 export type DayPhotoKind = "viewpoint" | "breakpoint" | "attraction";
@@ -146,6 +147,7 @@ export const dayDetails: Record<number, DayDetail> = {
       },
     ],
   },
+  ...japanRideDayDetails,
 };
 
 export function subtitleFor(stageId: StageId, detail: DayDetail): string {

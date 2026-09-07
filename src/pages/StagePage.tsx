@@ -1,4 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom";
+import { STAGE_NOTES } from "../data/japanrideTouch";
 import { fmtClimb, fmtInt, fmtKm } from "../data/format";
 import {
   STAGE_SUBTITLE,
@@ -49,12 +50,7 @@ export default function StagePage() {
 
       <div className="detail-intro">
         <div className="detail-narrative">
-          <p>
-            {from.name} ({from.nameJa}) to {to.name} ({to.nameJa}). {stage.days}{" "}
-            {stage.days === 1 ? "riding day" : "riding days"} on the overnight itinerary.
-            Open a day for the sheet: notes, photographs, and the schematic profile when
-            we have them.
-          </p>
+          <p>{STAGE_NOTES[stage.id]}</p>
         </div>
         <aside className="this-day">
           <h2>This stage</h2>

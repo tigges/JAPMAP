@@ -6,6 +6,7 @@ import {
   slotsForKind,
   subtitleFor,
 } from "./dayDetails";
+import { JAPANRIDE_TOUCHES, STAGE_NOTES } from "./japanrideTouch";
 import { dayOf, stageDayOrdinal, stageKmProgress, stageOf } from "./ride";
 
 describe("Day 1 sheet from the detail artifact", () => {
@@ -68,5 +69,41 @@ describe("stage progress on a day sheet", () => {
     const day = dayOf(12)!;
     expect(stageDayOrdinal(day)).toEqual({ index: 1, of: 7 });
     expect(stageKmProgress(day).start).toBe(0);
+  });
+});
+
+describe("JAPANRIDE place content on overlapping days", () => {
+  it("fills only the overnight hops that actually touch the catalog", () => {
+    expect(JAPANRIDE_TOUCHES.map((t) => t.day)).toEqual([
+      11, 12, 19, 21, 22, 23, 24, 26, 28, 30, 32, 36, 42,
+    ]);
+  });
+
+  it("does not import NHK stills", () => {
+    for (const touch of JAPANRIDE_TOUCHES) {
+      const d = detailOf(touch.day);
+      expect(d.photos.length).toBeGreaterThan(0);
+      for (const photo of d.photos) {
+        expect(photo.commons).toContain("commons.wikimedia.org");
+        expect(photo.commons).not.toMatch(/nhk/i);
+        expect(photo.file).not.toMatch(/nhk/i);
+      }
+    }
+  });
+
+  it("keeps off-line catalog places honest in the copy", () => {
+    expect(detailOf(12).narrative).toMatch(/Hotokegaura/);
+    expect(detailOf(12).narrative).toMatch(/Not the Tsugaru/);
+    expect(detailOf(22).narrative).toMatch(/eight kilometres of rideable sand/);
+    expect(detailOf(22).narrative).toMatch(/Wajima/);
+    expect(detailOf(30).narrative).toMatch(/off the land line/);
+    expect(detailOf(36).narrative).toMatch(/Yamanami Highway to Yufuin is inland/);
+    expect(detailOf(19).narrative).toMatch(/Sado Island/);
+  });
+
+  it("gives every stage a place blurb from those overlaps", () => {
+    expect(STAGE_NOTES.hokuriku).toMatch(/Chirihama/);
+    expect(STAGE_NOTES.sanyo).toMatch(/Shimanami/);
+    expect(STAGE_NOTES.kyushu).toMatch(/Usuki/);
   });
 });
