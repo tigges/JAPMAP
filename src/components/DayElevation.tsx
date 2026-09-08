@@ -1,9 +1,9 @@
 import { fmtKm } from "../data/format";
-import { GRADE_BANDS, milestonesOf, type DayDetail } from "../data/dayDetails";
+import { GRADE_BANDS, highPointKm, milestonesOf, type DayDetail } from "../data/dayDetails";
 
 const W = 640;
 const H = 248;
-const PAD = { l: 40, r: 18, t: 36, b: 32 };
+const PAD = { l: 44, r: 22, t: 46, b: 32 };
 
 function gradeColor(gainM: number, km: number): string {
   const pct = km <= 0 ? 0 : gainM / (km * 10);
@@ -76,21 +76,22 @@ export default function DayElevation({ km, detail }: Props) {
         {milestonesOf(detail)
           .filter((p) => p.atKm != null)
           .map((p) => {
-            const px = x(p.atKm!);
+            const raw = x(p.atKm!);
+            const px = Math.min(W - PAD.r - 10, Math.max(PAD.l + 10, raw));
             return (
               <g key={p.n}>
                 <line
-                  x1={px}
-                  x2={px}
+                  x1={raw}
+                  x2={raw}
                   y1={PAD.t}
                   y2={H - PAD.b}
                   stroke="rgba(178,58,30,0.35)"
                   strokeDasharray="3 3"
                 />
-                <rect x={px - 8} y={6} width={16} height={16} rx={2} fill="#b23a1e" />
+                <rect x={px - 8} y={8} width={16} height={16} rx={2} fill="#b23a1e" />
                 <text
                   x={px}
-                  y={18}
+                  y={20}
                   textAnchor="middle"
                   fill="#fff"
                   fontSize="10"
@@ -113,7 +114,14 @@ export default function DayElevation({ km, detail }: Props) {
               strokeDasharray="4 4"
               strokeWidth="1"
             />
-            <text x={PAD.l + 4} y={y(detail.highPointM) - 6} className="elev-anno">
+            <text
+              x={Math.min(
+                x(highPointKm(detail) ?? km / 2) + 8,
+                W - PAD.r - 4,
+              )}
+              y={y(detail.highPointM) - 6}
+              className="elev-anno"
+            >
               High point {detail.highPointM} m
             </text>
           </g>
@@ -143,14 +151,16 @@ export default function DayElevation({ km, detail }: Props) {
             </text>
           )}
       </svg>
-      <ol className="grade-legend">
-        {GRADE_BANDS.map((b) => (
-          <li key={b.label}>
-            <i style={{ background: b.color }} />
-            {b.label}
-          </li>
-        ))}
-      </ol>
+      {profile ? (
+        <ol className="grade-legend">
+          {GRADE_BANDS.map((b) => (
+            <li key={b.label}>
+              <i style={{ background: b.color }} />
+              {b.label}
+            </li>
+          ))}
+        </ol>
+      ) : null}
       {profile ? (
         <p className="elev-caption">
           Schematic. High point and hardest kilometre are from the published day sheet;
