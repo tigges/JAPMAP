@@ -29,6 +29,14 @@ export default function DayElevation({ km, detail }: Props) {
 
   const profile = detail.profile;
   const hardest = detail.hardestKm;
+  const marks = milestonesOf(detail).filter((p) => p.atKm != null);
+  const badgeX: number[] = [];
+  for (const p of marks) {
+    let px = x(p.atKm!);
+    const prev = badgeX[badgeX.length - 1];
+    if (prev != null && px - prev < 20) px = prev + 20;
+    badgeX.push(Math.min(W - PAD.r - 10, Math.max(PAD.l + 10, px)));
+  }
 
   return (
     <div className="day-elev">
@@ -73,36 +81,6 @@ export default function DayElevation({ km, detail }: Props) {
           </text>
         ) : null}
 
-        {milestonesOf(detail)
-          .filter((p) => p.atKm != null)
-          .map((p) => {
-            const raw = x(p.atKm!);
-            const px = Math.min(W - PAD.r - 10, Math.max(PAD.l + 10, raw));
-            return (
-              <g key={p.n}>
-                <line
-                  x1={raw}
-                  x2={raw}
-                  y1={PAD.t}
-                  y2={H - PAD.b}
-                  stroke="rgba(178,58,30,0.35)"
-                  strokeDasharray="3 3"
-                />
-                <rect x={px - 8} y={8} width={16} height={16} rx={2} fill="#b23a1e" />
-                <text
-                  x={px}
-                  y={20}
-                  textAnchor="middle"
-                  fill="#fff"
-                  fontSize="10"
-                  fontWeight="700"
-                  fontFamily="Inter, sans-serif"
-                >
-                  {p.n}
-                </text>
-              </g>
-            );
-          })}
         {detail.highPointM != null ? (
           <g>
             <line
@@ -143,13 +121,42 @@ export default function DayElevation({ km, detail }: Props) {
                 />
               );
             })
-          : milestonesOf(detail).some((p) => p.atKm != null)
+          : marks.length > 0
             ? null
             : (
             <text x={W / 2} y={H / 2} className="elev-empty" textAnchor="middle">
               Elevation profile when the track is in-tree
             </text>
           )}
+
+        {marks.map((p, i) => {
+          const raw = x(p.atKm!);
+          const px = badgeX[i]!;
+          return (
+            <g key={p.n}>
+              <line
+                x1={raw}
+                x2={raw}
+                y1={PAD.t}
+                y2={H - PAD.b}
+                stroke="rgba(178,58,30,0.35)"
+                strokeDasharray="3 3"
+              />
+              <rect x={px - 8} y={8} width={16} height={16} rx={2} fill="#b23a1e" />
+              <text
+                x={px}
+                y={20}
+                textAnchor="middle"
+                fill="#fff"
+                fontSize="10"
+                fontWeight="700"
+                fontFamily="Inter, sans-serif"
+              >
+                {p.n}
+              </text>
+            </g>
+          );
+        })}
       </svg>
       {profile ? (
         <ol className="grade-legend">

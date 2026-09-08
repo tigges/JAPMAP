@@ -17,9 +17,9 @@ export default function DayMilestones({ detail }: { detail: DayDetail }) {
         <h2>Milestones</h2>
         <p>In kilometre order — ride the day by reading down.</p>
       </div>
-      <ol className="milestone-list">
+      <div className="milestone-list">
         {rows.map((photo) => (
-          <li key={photo.n} className="milestone">
+          <article key={photo.n} className="milestone">
             <div className="milestone-meta">
               <p className="milestone-km">
                 {photo.atKm != null ? (
@@ -32,7 +32,7 @@ export default function DayMilestones({ detail }: { detail: DayDetail }) {
                 )}
               </p>
               <b className="milestone-num">{photo.n}</b>
-              <div>
+              <div className="milestone-copy-wrap">
                 {photo.titleJa ? <p className="milestone-ja">{photo.titleJa}</p> : null}
                 <h3>{photo.title}</h3>
                 <p className="milestone-kind">{PHOTO_KIND_LABEL[photo.kind]}</p>
@@ -52,9 +52,9 @@ export default function DayMilestones({ detail }: { detail: DayDetail }) {
             ) : (
               <div className="milestone-ph">Photograph when we have one.</div>
             )}
-          </li>
+          </article>
         ))}
-      </ol>
+      </div>
     </section>
   );
 }
