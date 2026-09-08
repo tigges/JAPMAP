@@ -42,21 +42,21 @@ export default function DayInsetMap({ from, to, color, photos }: Props) {
       [to.lat, to.lng],
     ];
 
-    for (const photo of photos) {
-      if (photo.lat == null || photo.lng == null) continue;
-      pts.push([photo.lat, photo.lng]);
+    const geophotos = photos.filter((p) => p.lat != null && p.lng != null);
+    for (const photo of geophotos) {
+      pts.push([photo.lat!, photo.lng!]);
       const icon = L.divIcon({
         className: "day-pin-wrap",
         html: `<span class="day-pin">${photo.n}</span>`,
         iconSize: [24, 24],
         iconAnchor: [12, 12],
       });
-      L.marker([photo.lat, photo.lng], { icon })
+      L.marker([photo.lat!, photo.lng!], { icon })
         .bindTooltip(`${photo.n}. ${photo.title}`, { direction: "top" })
         .addTo(map);
     }
 
-    if (photos.length === 0) {
+    if (geophotos.length === 0) {
       L.circleMarker([from.lat, from.lng], {
         radius: 7,
         color: "#1a1814",

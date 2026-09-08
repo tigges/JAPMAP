@@ -1,9 +1,9 @@
 import { fmtKm } from "../data/format";
-import { GRADE_BANDS, type DayDetail } from "../data/dayDetails";
+import { GRADE_BANDS, milestonesOf, type DayDetail } from "../data/dayDetails";
 
 const W = 640;
-const H = 228;
-const PAD = { l: 40, r: 14, t: 18, b: 32 };
+const H = 248;
+const PAD = { l: 40, r: 18, t: 36, b: 32 };
 
 function gradeColor(gainM: number, km: number): string {
   const pct = km <= 0 ? 0 : gainM / (km * 10);
@@ -67,6 +67,41 @@ export default function DayElevation({ km, detail }: Props) {
           />
         ) : null}
 
+        {hardest ? (
+          <text x={W - PAD.r} y={14} className="elev-anno" textAnchor="end">
+            shaded band = hardest kilometre
+          </text>
+        ) : null}
+
+        {milestonesOf(detail)
+          .filter((p) => p.atKm != null)
+          .map((p) => {
+            const px = x(p.atKm!);
+            return (
+              <g key={p.n}>
+                <line
+                  x1={px}
+                  x2={px}
+                  y1={PAD.t}
+                  y2={H - PAD.b}
+                  stroke="rgba(178,58,30,0.35)"
+                  strokeDasharray="3 3"
+                />
+                <rect x={px - 8} y={6} width={16} height={16} rx={2} fill="#b23a1e" />
+                <text
+                  x={px}
+                  y={18}
+                  textAnchor="middle"
+                  fill="#fff"
+                  fontSize="10"
+                  fontWeight="700"
+                  fontFamily="Inter, sans-serif"
+                >
+                  {p.n}
+                </text>
+              </g>
+            );
+          })}
         {detail.highPointM != null ? (
           <g>
             <line
@@ -100,7 +135,9 @@ export default function DayElevation({ km, detail }: Props) {
                 />
               );
             })
-          : (
+          : milestonesOf(detail).some((p) => p.atKm != null)
+            ? null
+            : (
             <text x={W / 2} y={H / 2} className="elev-empty" textAnchor="middle">
               Elevation profile when the track is in-tree
             </text>
@@ -118,6 +155,11 @@ export default function DayElevation({ km, detail }: Props) {
         <p className="elev-caption">
           Schematic. High point and hardest kilometre are from the published day sheet;
           the shape between those facts is not a GPS track.
+        </p>
+      ) : detail.hardestKm || detail.highPointM != null ? (
+        <p className="elev-caption">
+          High point and hardest kilometre from the published day sheet. Elevation
+          track when we have one.
         </p>
       ) : null}
     </div>
