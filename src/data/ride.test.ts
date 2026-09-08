@@ -7,7 +7,9 @@ import {
   dayOf,
   daysWithKm,
   effortOf,
+  hopLabel,
   japanBounds,
+  kmWindow,
   maxEffort,
   minEffort,
   placeOf,
@@ -124,6 +126,21 @@ describe("effort and day geometry", () => {
     expect(dayKmSum).toBeLessThan(ride.km);
     expect(dayClimbSum).toBeGreaterThan(40000);
     expect(Math.abs(ride.km - dayKmSum)).toBeGreaterThan(20);
+  });
+
+  it("labels adjacent hops the way the day pager does", () => {
+    expect(hopLabel(dayOf(1)!)).toBe("Cape Sōya → Bakkai");
+    expect(hopLabel(dayOf(2)!)).toBe("Bakkai → Enbetsu");
+    expect(hopLabel(dayOf(5)!)).toBe("Rumoi → Mashike");
+  });
+
+  it("puts Day 1 at kilometre zero with the rest of the ride ahead", () => {
+    const d1 = daysWithKm[0]!;
+    const w = kmWindow(d1);
+    expect(w.behind).toBe(0);
+    expect(w.start).toBe(0);
+    expect(w.end).toBe(Math.round(d1.km));
+    expect(w.ahead).toBeGreaterThan(3300);
   });
 });
 

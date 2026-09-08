@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import DayElevation from "../components/DayElevation";
 import DayInsetMap from "../components/DayInsetMap";
+import DayPager from "../components/DayPager";
 import {
   PHOTO_SECTIONS,
   detailOf,
@@ -9,14 +10,15 @@ import {
   slotsForKind,
   subtitleFor,
 } from "../data/dayDetails";
-import { fmtClimb, fmtKm } from "../data/format";
+import { fmtClimb, fmtInt, fmtKm } from "../data/format";
 import {
   FERRY_NOTE,
+  dayWithKmOf,
+  kmWindow,
   photoUrl,
   placeOf,
   ride,
   rideDays,
-  stageDayOrdinal,
   stageKmProgress,
   stageOf,
 } from "../data/ride";
@@ -41,26 +43,19 @@ export default function DayPage() {
 
   if (!day) return <Navigate to="/" replace />;
 
+  const dayFull = dayWithKmOf(day.n);
+  const span = dayFull ? kmWindow(dayFull) : null;
   const stage = stageOf(day.stageId);
   const from = placeOf(day.from);
   const to = placeOf(day.to);
   const detail = detailOf(day.n);
-  const ordinal = stageDayOrdinal(day);
   const progress = stageKmProgress(day);
   const subtitle = subtitleFor(stage.id, detail);
   const hasPins = detail.photos.some((p) => p.lat != null);
 
   return (
     <article className="detail-page day-page">
-      <p className="detail-crumb">
-        <Link to="/">{ride.titlePlaces}</Link>
-        {" · "}
-        <Link to={`/stages/${stage.id}`}>
-          Stage {stage.number}, {stage.name}
-        </Link>
-        {" · "}
-        Day {ordinal.index} of {ordinal.of}
-      </p>
+      {dayFull ? <DayPager day={dayFull} /> : null}
 
       <header
         className="detail-banner"
@@ -74,6 +69,25 @@ export default function DayPage() {
           </h1>
         </div>
       </header>
+
+      {span && dayFull ? (
+        <div
+          className="ride-km-bar"
+          role="img"
+          aria-label={`${fmtInt(span.behind)} kilometres behind, ${fmtInt(span.ahead)} kilometres ahead`}
+        >
+          <span>{fmtInt(span.behind)} km behind</span>
+          <div className="ride-km-track">
+            <i
+              style={{
+                left: `${(dayFull.kmStart / ride.km) * 100}%`,
+                width: `${Math.max(0.55, (dayFull.km / ride.km) * 100)}%`,
+              }}
+            />
+          </div>
+          <span>{fmtInt(span.ahead)} km ahead</span>
+        </div>
+      ) : null}
 
       <div className="detail-intro">
         <div className="detail-narrative">
@@ -148,7 +162,7 @@ export default function DayPage() {
             {slotsForKind(detail, section.kind).map((photo, i) =>
               photo ? (
                 <figure key={photo.n} className="photo-card">
-                  <span className="photo-num">{photo.n}</span>
+                  <b className="photo-num">{photo.n}</b>
                   <img src={photoUrl(photo.file)} alt={photo.title} width={960} height={640} />
                   <figcaption>
                     <strong>{photo.title}</strong>
@@ -163,7 +177,7 @@ export default function DayPage() {
                 </figure>
               ) : (
                 <figure key={`${section.kind}-empty-${i}`} className="photo-card empty">
-                  <span className="photo-num muted">{emptySlotNumber(section.kind, i)}</span>
+                  <b className="photo-num muted">{emptySlotNumber(section.kind, i)}</b>
                   <div className="photo-ph">Photograph when we have one.</div>
                   <figcaption>
                     <strong>{section.heading}</strong>
