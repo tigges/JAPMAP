@@ -3,11 +3,22 @@ import {
   dayDetails,
   detailOf,
   emptySlotNumber,
+  milestonesOf,
+  photoSourced,
+  practicalOf,
   slotsForKind,
   subtitleFor,
 } from "./dayDetails";
 import { JAPANRIDE_TOUCHES, STAGE_NOTES } from "./japanrideTouch";
-import { dayOf, stageDayOrdinal, stageKmProgress, stageOf } from "./ride";
+import {
+  dayOf,
+  effortOf,
+  placeOf,
+  stageDayOrdinal,
+  stageKmProgress,
+  stageOf,
+} from "./ride";
+import { fmtEffort } from "./format";
 
 describe("Day 1 sheet from the detail artifact", () => {
   const d = dayDetails[1]!;
@@ -19,19 +30,51 @@ describe("Day 1 sheet from the detail artifact", () => {
     expect(d.hardestKm).toEqual({ gainM: 74, atKm: 17.4 });
     expect(d.photos).toHaveLength(6);
     expect(d.photos.map((p) => p.n)).toEqual([1, 2, 3, 4, 5, 6]);
-    expect(d.photos[0]!.title).toBe("Cape Sōya observation deck");
-    expect(d.photos[2]!.title).toBe("Wakkanai harbour");
-    expect(d.photos[4]!.title).toMatch(/KAL 007/);
-    expect(d.photos[5]!.title).toMatch(/Oshidomari/);
+    expect(d.photos.map((p) => p.title)).toEqual([
+      "Cape Sōya observation deck",
+      "KAL 007 memorial",
+      "The open Sea of Japan",
+      "Oshidomari, Rishiri Island",
+      "Wakkanai harbour",
+      "Wakkanai, from the hillside",
+    ]);
+    expect(d.photos[3]!.kind).toBe("road");
+    expect(d.photos.map((p) => p.atKm)).toEqual([0, 0.4, 6, 30, 45.3, 47]);
   });
 
   it("credits every Day 1 photograph", () => {
     for (const photo of d.photos) {
+      expect(photoSourced(photo)).toBe(true);
       expect(photo.commons).toContain("commons.wikimedia.org");
-      expect(photo.artist.length).toBeGreaterThan(1);
-      expect(photo.license.length).toBeGreaterThan(1);
-      expect(photo.file.length).toBeGreaterThan(1);
+      expect(photo.artist!.length).toBeGreaterThan(1);
+      expect(photo.license!.length).toBeGreaterThan(1);
+      expect(photo.file!.length).toBeGreaterThan(1);
     }
+  });
+
+  it("lists the day in kilometre order for the practical sidebar", () => {
+    const day = dayOf(1)!;
+    const items = practicalOf(day, d, placeOf(day.from), placeOf(day.to));
+    expect(items[0]).toMatchObject({
+      value: "0 km",
+      title: "Start at Cape Sōya",
+      note: "through Wakkanai",
+    });
+    expect(items.map((i) => i.title)).toEqual([
+      "Start at Cape Sōya",
+      "Hardest kilometre",
+      "High point",
+      "Break — Wakkanai harbour",
+      "Finish at Bakkai",
+    ]);
+    expect(milestonesOf(d).map((p) => p.title)).toEqual([
+      "Cape Sōya observation deck",
+      "KAL 007 memorial",
+      "The open Sea of Japan",
+      "Oshidomari, Rishiri Island",
+      "Wakkanai harbour",
+      "Wakkanai, from the hillside",
+    ]);
   });
 });
 
@@ -84,6 +127,7 @@ describe("JAPANRIDE place content on overlapping days", () => {
       const d = detailOf(touch.day);
       expect(d.photos.length).toBeGreaterThan(0);
       for (const photo of d.photos) {
+        if (!photoSourced(photo)) continue;
         expect(photo.commons).toContain("commons.wikimedia.org");
         expect(photo.commons).not.toMatch(/nhk/i);
         expect(photo.file).not.toMatch(/nhk/i);
@@ -105,5 +149,46 @@ describe("JAPANRIDE place content on overlapping days", () => {
     expect(STAGE_NOTES.hokuriku).toMatch(/Chirihama/);
     expect(STAGE_NOTES.sanyo).toMatch(/Shimanami/);
     expect(STAGE_NOTES.kyushu).toMatch(/Usuki/);
+  });
+});
+
+describe("Day 35 sheet from the Mōji to Usa artifact", () => {
+  const d = dayDetails[35]!;
+
+  it("copies the Suō-nada narrative and figures, without inventing a track", () => {
+    expect(d.narrative).toMatch(/Suō-nada/);
+    expect(d.narrative).toMatch(/Nakatsu/);
+    expect(d.narrative).toMatch(/Usa/);
+    expect(d.via).toBe("through Nakatsu");
+    expect(d.highPointM).toBe(182);
+    expect(d.highPointAtKm).toBe(0.6);
+    expect(d.hardestKm).toEqual({ gainM: 30, atKm: 3.2 });
+    expect(d.profile).toBeUndefined();
+    expect(d.narrative).not.toMatch(/寺泊/);
+  });
+
+  it("keeps three unsourced milestones in kilometre order", () => {
+    expect(d.photos).toHaveLength(3);
+    expect(d.photos.every((p) => !photoSourced(p))).toBe(true);
+    expect(d.photos.map((p) => p.titleJa)).toEqual([
+      "風師展望台",
+      "道の駅豊前おこしかけ",
+      "豊前温泉天狗の湯",
+    ]);
+    expect(d.photos.map((p) => p.atKm)).toEqual([0.9, 53.1, 55.5]);
+  });
+
+  it("lists start, hardest, high point, first break, and Usa", () => {
+    const day = dayOf(35)!;
+    expect(fmtEffort(effortOf(day))).toBe("133");
+    const items = practicalOf(day, d, placeOf(day.from), placeOf(day.to));
+    expect(items.map((i) => i.title)).toEqual([
+      "Start at Mōji",
+      "Hardest kilometre",
+      "High point",
+      "Break — 道の駅豊前おこしかけ",
+      "Finish at Usa",
+    ]);
+    expect(items[0]!.note).toBe("through Nakatsu");
   });
 });

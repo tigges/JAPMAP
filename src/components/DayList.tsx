@@ -19,7 +19,7 @@ function DayRow({ day }: { day: RideDay }) {
         <span className="day-n">Day {day.n}</span>
         <span className="day-route">
           {from.name} → {to.name}
-          {day.milestone ? <i className="milestone" title="Milestone photograph" /> : null}
+          {day.milestone ? <i className="day-dot" title="Milestone photograph" /> : null}
         </span>
         <span className="day-km">{fmtKm(day.km)} km</span>
         <span className="day-climb">{fmtClimb(day.climbM)}</span>

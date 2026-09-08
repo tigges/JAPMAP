@@ -469,6 +469,28 @@ export const dayClimbSum = daysWithKm.reduce((s, d) => s + d.climbM, 0);
 export const maxEffort = Math.max(...daysWithKm.map((d) => d.effort));
 export const minEffort = Math.min(...daysWithKm.map((d) => d.effort));
 
+export function dayWithKmOf(n: number): DayWithKm | undefined {
+  return daysWithKm.find((d) => d.n === n);
+}
+
+/** Town-to-town label used in the artifact day pager. */
+export function hopLabel(day: { from: PlaceId; to: PlaceId }): string {
+  return `${placeOf(day.from).name} → ${placeOf(day.to).name}`;
+}
+
+/** Rounded km window for the sticky bar and behind/ahead track. */
+export function kmWindow(day: DayWithKm): {
+  start: number;
+  end: number;
+  behind: number;
+  ahead: number;
+} {
+  const start = Math.round(day.kmStart);
+  const end = Math.round(day.kmStart + day.km);
+  const ahead = Math.max(0, Math.round(ride.km - day.kmStart - day.km));
+  return { start, end, behind: start, ahead };
+}
+
 export const chartTicks: { label: string; km: number }[] = [
   { label: "Cape Sōya", km: 0 },
   { label: "Hakodate", km: 847 },

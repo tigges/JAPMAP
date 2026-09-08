@@ -6,7 +6,6 @@ import {
   daysOfStage,
   photoUrl,
   placeOf,
-  ride,
   stageOf,
   type StageId,
 } from "../data/ride";
@@ -32,11 +31,15 @@ export default function StagePage() {
 
   return (
     <article className="detail-page stage-page">
-      <p className="detail-crumb">
-        <Link to="/">{ride.titlePlaces}</Link>
-        {" · "}
-        Stage {stage.number}, {stage.name}
-      </p>
+      <nav className="day-pager stage-pager" aria-label="Stage">
+        <Link className="day-pager-all" to="/#days">
+          ← All 42 days
+        </Link>
+        <p className="day-pager-index">
+          Stage {stage.number}
+        </p>
+        <p className="day-pager-stage-name">{stage.name}</p>
+      </nav>
 
       <header
         className="detail-banner"
