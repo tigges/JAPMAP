@@ -27,13 +27,16 @@ export default function Ride() {
     <article className="ride-page">
       <section className="hero-v2">
         <div className="hero-copy-v2">
-          <p className="eyebrow">Cape Sōya → Cape Sata · by bicycle</p>
+          <p className="eyebrow">
+            {fmtInt(ride.km)} km · {ride.ridingDays} days · {ride.titleJa}
+          </p>
           <h1>
-            Pole <em>to</em> Pole
+            <span className="hero-kicker">{ride.titleKicker}</span>
+            Cape Sōya <em>to</em> Cape Sata
           </h1>
           <p className="lede">
-            One road down the length of Japan, from the monument at the northern tip of
-            Hokkaidō to the lighthouse at the southern tip of Kyūshū. Forty-two riding
+            An original bicycle traverse of Japan, from the monument at the northern tip
+            of Hokkaidō to the lighthouse at the southern tip of Kyūshū. Forty-two riding
             days, routed on real roads and measured off the track itself.
           </p>
           <div className="pole-coords">
@@ -54,7 +57,7 @@ export default function Ride() {
         <figure className="hero-photo">
           <img
             src={photoUrl(heroPhoto.file)}
-            alt="Monument at Cape Sōya, the northern pole of the ride"
+            alt="Monument at Cape Sōya, where the ride begins"
             width={900}
             height={1200}
           />

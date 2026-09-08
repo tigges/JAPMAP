@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "JAPMAP — Pole to Pole: one original bicycle traverse of Japan, Cape Sōya to Cape Sata.",
+  "description": "JAPMAP — Biking from Cape Sōya to Cape Sata: an original bicycle traverse of Japan.",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build && cp dist/index.html dist/404.html && touch dist/.nojekyll",

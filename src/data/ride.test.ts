@@ -42,6 +42,10 @@ describe("the two poles", () => {
 describe("the routed ride", () => {
   it("runs north to south as Sōya → Sata", () => {
     expect(ride.id).toBe("soya-sata");
+    expect(ride.title).toBe("Biking from Cape Sōya to Cape Sata");
+    expect(ride.titleKicker).toBe("Biking from");
+    expect(ride.titlePlaces).toBe("Cape Sōya to Cape Sata");
+    expect(ride.titleJa).toBe("宗谷岬から佐多岬へ");
     expect(ride.direction).toBe("north-to-south");
     expect(ride.from).toBe("soya");
     expect(ride.to).toBe("sata");

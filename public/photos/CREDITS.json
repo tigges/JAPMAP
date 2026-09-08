@@ -54,5 +54,187 @@
     "artist": "TANAKA Juuyoh (talk)",
     "license": "CC BY 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Sakurajima55.jpg"
+  },
+  {
+    "file": "day1-02-sea.jpg",
+    "commons": "Sea of Japan from Soya Main Line.jpg",
+    "artist": "MaksimTack",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Sea_of_Japan_from_Soya_Main_Line.jpg"
+  },
+  {
+    "file": "day1-03-wakkanai-harbour.jpg",
+    "commons": "Wakkanai harbor.JPG",
+    "artist": "100yen",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Wakkanai_harbor.JPG"
+  },
+  {
+    "file": "day1-04-wakkanai-hill.jpg",
+    "commons": "Wakkanai city view.jpg",
+    "artist": "Kitayama",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Wakkanai_city_view.jpg"
+  },
+  {
+    "file": "day1-05-kal.jpg",
+    "commons": "KAL Monument in Cape Soya 20140813.jpg",
+    "artist": "Suicasmo",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:KAL_Monument_in_Cape_Soya_20140813.jpg"
+  },
+  {
+    "file": "day1-06-oshidomari.jpg",
+    "commons": "Oshidomari Port, Rishirifuji, Rishiri Island, Hokkaido Prefecture, Japan.jpg",
+    "artist": "OKJaguar",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Oshidomari_Port,_Rishirifuji,_Rishiri_Island,_Hokkaido_Prefecture,_Japan.jpg"
+  },
+  {
+    "file": "day11-hakodate-night.jpg",
+    "commons": "Mount-Hakodate Night-view.jpg",
+    "artist": "MaedaAkihiko",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Mount-Hakodate_Night-view.jpg"
+  },
+  {
+    "file": "day11-goryokaku.jpg",
+    "commons": "Hokkaido-Goryokaku Fort in Summer-xl.jpg",
+    "artist": "Goryokaku-Tower",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Hokkaido-Goryokaku_Fort_in_Summer-xl.jpg"
+  },
+  {
+    "file": "day11-kanemori.jpg",
+    "commons": "Kanemori Red Brick Warehouse.jpg",
+    "artist": "OraMAAG",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Kanemori_Red_Brick_Warehouse.jpg"
+  },
+  {
+    "file": "day11-asaichi.jpg",
+    "commons": "Hakodate Morning Market, Hakodate Asaichi, Hakodate, 2014.jpg",
+    "artist": "bryan...",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Hakodate_Morning_Market,_Hakodate_Asaichi,_Hakodate,_2014.jpg"
+  },
+  {
+    "file": "day12-aomori-bay.jpg",
+    "commons": "Aomori Bay Bridge 20200621.jpg",
+    "artist": "掬茶",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aomori_Bay_Bridge_20200621.jpg"
+  },
+  {
+    "file": "day12-fukaura.jpg",
+    "commons": "JRE-Gono-line Yukiaizaki.jpg",
+    "artist": "MaedaAkihiko",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:JRE-Gono-line_Yukiaizaki.jpg"
+  },
+  {
+    "file": "day19-bandai.jpg",
+    "commons": "Bandai Bridge, Niigata, Japan 001.JPG",
+    "artist": "Shoestring",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bandai_Bridge,_Niigata,_Japan_001.JPG"
+  },
+  {
+    "file": "day21-uozu.jpg",
+    "commons": "Uozu Buried Forest Museum ac (1).jpg",
+    "artist": "Asturio Cantabrio",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Uozu_Buried_Forest_Museum_ac_(1).jpg"
+  },
+  {
+    "file": "day22-amaharashi.jpg",
+    "commons": "Amaharashi Coast 20150122.JPG",
+    "artist": "そらみみ",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Amaharashi_Coast_20150122.JPG"
+  },
+  {
+    "file": "day23-kenrokuen.jpg",
+    "commons": "20190705 Kenroku-en-4.jpg",
+    "artist": "Balon Greyjoy",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:20190705_Kenroku-en-4.jpg"
+  },
+  {
+    "file": "day23-castle.jpg",
+    "commons": "Kanazawa Castle, Kanazawa City; April 2016 (04).jpg",
+    "artist": "fish0835",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Kanazawa_Castle,_Kanazawa_City;_April_2016_(04).jpg"
+  },
+  {
+    "file": "day23-chaya.jpg",
+    "commons": "Higashi Chaya District (50153812728).jpg",
+    "artist": "Raita Futo",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Higashi_Chaya_District_(50153812728).jpg"
+  },
+  {
+    "file": "day24-tojinbo.jpg",
+    "commons": "Tojinbo cliffs, Fukui Prefecture; September 2019 (03).jpg",
+    "artist": "雷太",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Tojinbo_cliffs,_Fukui_Prefecture;_September_2019_(03).jpg"
+  },
+  {
+    "file": "day26-biwa.jpg",
+    "commons": "Lake Biwa viewed from Otsu SA.JPG",
+    "artist": "もんじゃ",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Lake_Biwa_viewed_from_Otsu_SA.JPG"
+  },
+  {
+    "file": "day30-onomichi.jpg",
+    "commons": "Onomichi from Senko-ji.jpg",
+    "artist": "Shinkansen",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Onomichi_from_Senko-ji.jpg"
+  },
+  {
+    "file": "day30-channel.jpg",
+    "commons": "Onomichi Channel 20190323.jpg",
+    "artist": "Suicasmo",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Onomichi_Channel_20190323.jpg"
+  },
+  {
+    "file": "day30-shimanami.jpg",
+    "commons": "Shimanami kaidō to Tatara Bridge.jpg",
+    "artist": "Fabimaru",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Shimanami_kaidō_to_Tatara_Bridge.jpg"
+  },
+  {
+    "file": "day32-yanai.jpg",
+    "commons": "Yanai White Wall.JPG",
+    "artist": "Suhobei",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Yanai_White_Wall.JPG"
+  },
+  {
+    "file": "day32-kintai.jpg",
+    "commons": "20100724 Iwakuni 5235.jpg",
+    "artist": "Jakub Hałun",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:20100724_Iwakuni_5235.jpg"
+  },
+  {
+    "file": "day36-usuki.jpg",
+    "commons": "Usuki Stone Buddhas.jpg",
+    "artist": "Wiiii",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Usuki_Stone_Buddhas.jpg"
+  },
+  {
+    "file": "day42-sakurajima-port.jpg",
+    "commons": "Mount Sakurajima from Kagoshima Port.JPG",
+    "artist": "そらみみ",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Mount_Sakurajima_from_Kagoshima_Port.JPG"
   }
 ]

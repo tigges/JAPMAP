@@ -6,12 +6,15 @@ export default function About() {
   return (
     <article className="about-page">
       <p className="eyebrow">What this is</p>
-      <h1>One road. Two poles.</h1>
+      <h1>
+        <span className="hero-kicker">{ride.titleKicker}</span>
+        Cape Sōya <em>to</em> Cape Sata
+      </h1>
       <p className="lede">
-        JAPMAP is an original bicycle traverse of Japan, from the monument at Cape Sōya
-        to the lighthouse at Cape Sata. {fmtInt(ride.km)} kilometres, {ride.ridingDays}{" "}
-        riding days, seven stages, three ferries. It is a journey narrative with a map —
-        not a route planner, and not a video index.
+        An original bicycle traverse of Japan, from the monument at Cape Sōya to the
+        lighthouse at Cape Sata. {fmtInt(ride.km)} kilometres, {ride.ridingDays} riding
+        days, seven stages, three ferries. It is a journey narrative with a map — not a
+        route planner, and not a video index.
       </p>
 
       <div className="notes">

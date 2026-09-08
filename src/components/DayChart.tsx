@@ -31,7 +31,7 @@ export default function DayChart({ onPick }: Props) {
       <div
         className="day-chart"
         role="img"
-        aria-label="Forty-two riding days from Cape Sōya to Cape Sata"
+        aria-label={`Forty-two riding days, ${ride.title}`}
         onMouseLeave={() => setHover(null)}
       >
         {daysWithKm.map((day) => {
