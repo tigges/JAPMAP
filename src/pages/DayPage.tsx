@@ -3,21 +3,19 @@ import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import DayElevation from "../components/DayElevation";
 import DayInsetMap from "../components/DayInsetMap";
 import DayPager from "../components/DayPager";
+import RideKmBar from "../components/RideKmBar";
 import {
   PHOTO_SECTIONS,
   detailOf,
   emptySlotNumber,
   slotsForKind,
-  subtitleFor,
 } from "../data/dayDetails";
-import { fmtClimb, fmtInt, fmtKm } from "../data/format";
+import { fmtClimb, fmtKm } from "../data/format";
 import {
   FERRY_NOTE,
   dayWithKmOf,
-  kmWindow,
   photoUrl,
   placeOf,
-  ride,
   rideDays,
   stageKmProgress,
   stageOf,
@@ -44,50 +42,22 @@ export default function DayPage() {
   if (!day) return <Navigate to="/" replace />;
 
   const dayFull = dayWithKmOf(day.n);
-  const span = dayFull ? kmWindow(dayFull) : null;
   const stage = stageOf(day.stageId);
   const from = placeOf(day.from);
   const to = placeOf(day.to);
   const detail = detailOf(day.n);
   const progress = stageKmProgress(day);
-  const subtitle = subtitleFor(stage.id, detail);
   const hasPins = detail.photos.some((p) => p.lat != null);
 
   return (
     <article className="detail-page day-page">
       {dayFull ? <DayPager day={dayFull} /> : null}
 
-      <header
-        className="detail-banner"
-        style={{ background: `color-mix(in srgb, ${stage.color} 45%, #1c3f4a)` }}
-      >
-        <p className="detail-banner-kicker">Day {day.n}</p>
-        <div>
-          <p className="detail-banner-sub">{subtitle}</p>
-          <h1>
-            {from.name} to {to.name}
-          </h1>
-        </div>
+      <header className="day-head">
+        <h1 className="day-title">
+          {from.name} to {to.name}
+        </h1>
       </header>
-
-      {span && dayFull ? (
-        <div
-          className="ride-km-bar"
-          role="img"
-          aria-label={`${fmtInt(span.behind)} kilometres behind, ${fmtInt(span.ahead)} kilometres ahead`}
-        >
-          <span>{fmtInt(span.behind)} km behind</span>
-          <div className="ride-km-track">
-            <i
-              style={{
-                left: `${(dayFull.kmStart / ride.km) * 100}%`,
-                width: `${Math.max(0.55, (dayFull.km / ride.km) * 100)}%`,
-              }}
-            />
-          </div>
-          <span>{fmtInt(span.ahead)} km ahead</span>
-        </div>
-      ) : null}
 
       <div className="detail-intro">
         <div className="detail-narrative">
@@ -131,6 +101,8 @@ export default function DayPage() {
           </dl>
         </aside>
       </div>
+
+      {dayFull ? <RideKmBar day={dayFull} /> : null}
 
       <dl className="detail-stats">
         <div>

@@ -13,6 +13,30 @@ type Props = {
   day: DayWithKm;
 };
 
+function Hop({
+  day,
+  dir,
+}: {
+  day: DayWithKm;
+  dir: "prev" | "next";
+}) {
+  const label = hopLabel(day);
+  return (
+    <Link
+      className="day-pager-hop"
+      to={`/days/${day.n}`}
+      aria-label={`${dir === "prev" ? "Previous" : "Next"} day, ${label}`}
+    >
+      {dir === "prev" ? <span className="day-pager-chevron">‹</span> : null}
+      <span className="day-pager-hop-places">
+        {placeOf(day.from).name} <span className="day-pager-arrow">→</span>{" "}
+        {placeOf(day.to).name}
+      </span>
+      {dir === "next" ? <span className="day-pager-chevron">›</span> : null}
+    </Link>
+  );
+}
+
 export default function DayPager({ day }: Props) {
   const prev = dayWithKmOf(day.n - 1);
   const next = dayWithKmOf(day.n + 1);
@@ -29,24 +53,8 @@ export default function DayPager({ day }: Props) {
           Day {day.n} of {ride.ridingDays}
         </p>
         <div className="day-pager-hops">
-          {prev ? (
-            <Link
-              className="day-pager-hop"
-              to={`/days/${prev.n}`}
-              aria-label={`Previous day, ${hopLabel(prev)}`}
-            >
-              ‹ {placeOf(prev.from).name} → {placeOf(prev.to).name}
-            </Link>
-          ) : null}
-          {next ? (
-            <Link
-              className="day-pager-hop"
-              to={`/days/${next.n}`}
-              aria-label={`Next day, ${hopLabel(next)}`}
-            >
-              {placeOf(next.from).name} → {placeOf(next.to).name} ›
-            </Link>
-          ) : null}
+          {prev ? <Hop day={prev} dir="prev" /> : null}
+          {next ? <Hop day={next} dir="next" /> : null}
         </div>
       </nav>
       <p className="day-pager-stage">
@@ -55,4 +63,3 @@ export default function DayPager({ day }: Props) {
     </>
   );
 }
-

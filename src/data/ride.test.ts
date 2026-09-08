@@ -132,6 +132,18 @@ describe("effort and day geometry", () => {
     expect(hopLabel(dayOf(1)!)).toBe("Cape Sōya → Bakkai");
     expect(hopLabel(dayOf(2)!)).toBe("Bakkai → Enbetsu");
     expect(hopLabel(dayOf(5)!)).toBe("Rumoi → Mashike");
+    expect(hopLabel(dayOf(34)!)).toBe("Hōfu → Shimonoseki");
+    expect(hopLabel(dayOf(35)!)).toBe("Mōji → Usa");
+    expect(hopLabel(dayOf(36)!)).toBe("Usa → Usuki");
+  });
+
+  it("puts Day 35 late on the line with kilometres still ahead", () => {
+    const d35 = daysWithKm.find((d) => d.n === 35)!;
+    const w = kmWindow(d35);
+    expect(w.behind).toBeGreaterThan(2500);
+    expect(w.ahead).toBeGreaterThan(400);
+    expect(w.ahead).toBeLessThan(900);
+    expect(w.end - w.start).toBe(Math.round(d35.km) || 82);
   });
 
   it("puts Day 1 at kilometre zero with the rest of the ride ahead", () => {

@@ -45,9 +45,7 @@ export default function StickyRideBar() {
         })}
       </div>
       <p className="sticky-stats">
-        {span
-          ? `km ${fmtInt(span.start)} – ${fmtInt(span.end)}`
-          : `${fmtInt(ride.km)} km · ${ride.ridingDays} days`}
+        {span ? `km ${fmtInt(span.start)} – ${fmtInt(span.end)}` : `${fmtInt(ride.km)} km · ${ride.ridingDays} days`}
       </p>
       <nav className="sticky-nav" aria-label="Site">
         <NavLink to="/" end>
